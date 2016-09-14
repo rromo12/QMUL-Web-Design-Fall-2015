@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<h1>User Posts</h1> 
+<div ng-app="beOneApp" ng-controller="postController">
+    <form>
+      Userid: <br>
+      <input type="text" ng-model="uid"> <br>
+      Post: <br>
+      <input type="text" ng-model="post"> <br>
+      Public: <br>
+      <select ng-model="pub">
+        <option value="Y">Y</option>
+        <option value="N">N</option>
+      </select> <br>
+
+
+    <input type="submit" class="btn btn-default" value="Save" ng-click="submit()" on-click="location.reload()">
+
+
+    </form>
+	<table>
+	  <tr ng-repeat="x in out">
+      <td>{{x.postid}}</td>
+	    <td>{{x.post}}</td>
+      <td>{{x.userid}}</td>
+      <td>{{x.public}}</td>
+	   </tr>
+	</table>
+</div>
+
+<!--Angular JS  -->
+<script>
+var app = angular.module('beOneApp',[])
+
+app.controller('postController', function($scope, $http) {
+  $http.get("http://webprojects.eecs.qmul.ac.uk/rgr30/BeOne/assets/php/get_user_posts.php?userid=*")
+   .success(function (response) {
+    $scope.out = response;
+    console.log(response)
+  });
+   $scope.submit = function(){
+    console.log($scope)
+    console.log("save")
+    $http.post("http://webprojects.eecs.qmul.ac.uk/rgr30/BeOne/assets/php/user_post.php", {
+      'post':$scope.post, 
+      'userid':$scope.uid,
+      'public':$scope.pub, 
+    }).success(function(data,status,headers,config){
+      console.log("success")
+    });
+
+  };
+});
+
+</script>
+    <?PHP print $errorMessage;?>  
+  </body>
+</html>

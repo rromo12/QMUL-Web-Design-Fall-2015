@@ -1,0 +1,109 @@
+<div class="form">
+
+    <ul class="tab-group">
+        <li class="tab active"><a data-toggle="tab" href="#signup">Sign Up</a></li>
+        <li class="tab"><a data-toggle="tab" href="#login">Log In</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="signup" class="tab-pane active">
+            <h1>Sign Up for Free</h1>
+            <div class="top-row field-wrap text-center"> 
+                <div class="fb-login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
+
+            </div>
+            <div ng-show="vm.error" class="alert alert-danger">{{vm.error}}</div>
+            <form name="signUpForm" ng-submit="vm.register()">  
+                <div class="top-row">
+                    <div class="field-wrap">
+                        <input placeholder="First Name" id="signUpFirstName" type="text" name="signUpFirstName" ng-model="vm.user.firstName" required autocomplete="off" /> 
+                    </div>
+
+                    <div class="field-wrap">
+                        <input placeholder="Last Name" id="signUpLastName" type="text" name="signUpLastName" ng-model="vm.user.lastName" required autocomplete="off"/> 
+                    </div>
+                </div>
+
+                <div class="field-wrap">
+                    <input placeholder="Email Address" id="signUpEmailAddress"  type="text" name="signUpEmailAddress" ng-model="vm.user.email" required autocomplete="off"/> 
+                </div>
+                <div class="field-wrap">
+                    <input placeholder="Password" type="password" id="signUpPassword" name="signUpPassword" ng-model="vm.user.password" required autocomplete="off"/> 
+                </div>
+
+                <div class="field-wrap">
+                    <input placeholder="Country" type="text" id="signUpCountry"  name="signUpCountry" ng-model="vm.user.country" required autocomplete="off"/> 
+                </div>
+
+                <div class="field-wrap">
+                    <input placeholder="City" type="text" id="signUpCity" name="signUpCity" ng-model="vm.user.city" required autocomplete="off"/> 
+                </div>
+
+
+                <div class="field-wrap">
+                    <input placeholder="Date of Birth" type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="signUpBirthday" name="signUpBirthday" ng-model="vm.user.birthday" required autocomplete="off"/>  
+                </div>
+
+                <div class="field-wrap">
+                    <select id="signUpSex" name="signUpSex" ng-model="vm.user.sex" class="form-control">
+                        <option ng-repeat="sex in vm.sexs">{{sex}}</option>
+                    </select>
+                </div>
+
+                <div class="field-wrap">
+                    <select id="signUpGoal" name="signUpGoal" ng-model="vm.user.goal" class="form-control">
+                        <option ng-repeat="goal in vm.goals">{{goal}}</option>
+                    </select>
+                </div>
+
+                <div class="field-wrap">Crop Image and Upload</div>
+                <button ngf-select class="btn btn-primary" ng-model="vm.user.profilePictureData" accept="image/*">Select Picture</button>
+                <div ngf-drop ng-model="vm.user.profilePictureData" ngf-pattern="image/*" class="cropArea">
+                    <img-crop image="vm.user.profilePictureData  | ngfDataUrl"
+                              result-image="vm.user.profilePictureBlob" ng-init="vm.user.profilePictureBlob=''" area-min-size="500">
+                    </img-crop>
+                </div>
+                <div>
+                    <img ng-src="{{vm.user.profilePictureBlob}}" />
+                </div>
+
+
+
+                <div class="form-actions">
+                    <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Register</button>
+                    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+                    <a role="tab" class="btn btn-primary" data-toggle="tab" ng-click="vm.close()">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+
+        <div id="login" class="tab-pane" ng-controller="LoginController as vm">
+            <h1>Welcome Back!</h1>
+
+            <form name="form" ng-submit="vm.login()" role="form">
+
+                <div class="field-wrap">
+                    <input type="text" name="email" id="email" class="form-control" ng-model="vm.email" placeholder="Email" required />
+                    <span ng-show="form.email.$dirty && form.email.$error.required" class="help-block">email is required</span>
+                </div>
+
+                <div class="field-wrap">
+                    <input type="password" name="password" id="password" class="form-control" ng-model="vm.password"  placeholder="Password" required />
+                    <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+                </div>
+
+                <p class="forgot"><a href="#">Forgot Password?</a></p>
+                <button type="submit" ng-disabled="form.$invalid || vm.dataLoading" class="btn btn-primary">Login</button>
+                <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </form>
+        </div>
+    </div><!-- tab-content -->
+</div>
+
+
+
+
+
+<link href="assets/css/signUpForm.css" rel="stylesheet">
+<link href="assets/css/ng-image-crop.css" rel="stylesheet">

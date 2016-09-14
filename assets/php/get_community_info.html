@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+
+<h1>Community Info</h1>
+<div ng-app="myApp" ng-controller="community_info"> 
+    <form>
+      Community Name: <br>
+      <input type="text" ng-model="cname"> <br>
+      AdminID: <br>
+      <input type="text" ng-model="adminid"> <br>
+        Picture: <br>
+      <input type="text" ng-model="picture"> <br>
+        Country: <br>
+      <input type="text" ng-model="country"> <br>
+        City: <br>
+      <input type="text" ng-model="city"> <br>
+        Description: <br>
+      <input type="text" ng-model="desc"> <br>
+
+
+    <input type="submit" class="btn btn-default" value="Save" ng-click="submit()">
+    </form>
+
+
+	<table>
+	  <tr ng-repeat="x in out">
+		<td>{{x.communityid}}</td>
+	    <td>{{x.community_name }}</td>
+	    <td>{{x.community_adminid}}</td>
+		<td>{{x.community_picture}}</td>
+		<td>{{x.community_country}}</td>
+    <td>{{x.community_city}}</td>
+		<td>{{x.community_description}}</td>
+		<td>{{x.community_creation_date}}</td>
+	  </tr>
+	</table>
+</div>
+
+<!--Angular JS  -->
+<script>
+var app = angular.module('myApp', []);
+app.controller('community_info', function($scope, $http) {
+
+   $http.get("http://webprojects.eecs.qmul.ac.uk/rgr30/BeOne/assets/php/get_community_info.php?communityid=*")
+   .success(function (response) {
+    $scope.out = response;
+    console.log(response)
+  });
+
+   $scope.submit = function(){
+    $http.post("http://webprojects.eecs.qmul.ac.uk/rgr30/BeOne/assets/php/create_community.php", {
+      'cname':$scope.cname,
+      'adminid':$scope.adminid, 
+      'picture':$scope.picture,
+      'country':$scope.country,
+      'city': $scope.city,
+      'description':$scope.desc
+    }).success(function(data,status,headers,config){
+      console.log("success")
+    });
+  };
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+    <?PHP print $errorMessage;?>  
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<style>
+table, th , td  {
+  border: 1px solid grey;
+  border-collapse: collapse;
+  padding: 5px;
+}
+table tr:nth-child(odd) {
+  background-color: #f1f1f1;
+}
+table tr:nth-child(even) {
+  background-color: #ffffff;
+}
+</style>
+
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
+<h1>User Info</h1>
+<div ng-app="myApp" ng-controller="user_info"> 
+  <form>
+      Current User ID: <br>
+      <input type="text" ng-model="uid"> <br>
+      First Name: <br>
+      <input type="text" ng-model="fname"> <br>
+      Last Name: <br>
+      <input type="text" ng-model="lname"> <br>
+      Email: <br>
+      <input type="text" ng-model="email"> <br>
+      Password: <br>
+      <input type="text" ng-model="pwd"> <br>
+      Country: <br>
+      <input type="text" ng-model="country"> <br>
+      City: <br>
+      <input type="text" ng-model="city"> <br>
+      D.O.B.: <br>
+      <input type="date" ng-model="dob"> <br>
+      Sex: <br>
+      <input type="text" ng-model="goal"> <br>
+      Song: <br>
+      <input type="text" ng-model="spotifyURI"> <br>
+      Quote: <br>
+      <input type="text" ng-model="quote"> <br>
+      Video: <br>
+      <input type="text" ng-model="youtubeURL"> <br>
+      Image: <br>
+      <input type="text" ng-model="imageURL"> <br>
+
+    
+
+    <input type="submit" class="btn btn-default" value="Save" ng-click="submit()">
+
+	<table>
+	  <tr ng-repeat="x in out">
+		<td>{{x.userid}}</td>
+	 <td>{{ x.user_fname }}</td>
+	  <td>{{ x.user_lname }}</td>
+    <td>{{x.user_password}}</td>
+		<td>{{x.user_goal}}</td>
+		<td>{{x.user_sex}}</td>
+		<td>{{x.user_country}}</td>
+		<td>{{x.user_city}}</td>
+		<td>{{x.user_commitment}}</td>
+		<td>{{x.user_birthdate}}</td>
+		<td>{{x.user_email}}</td>
+		<td>{{ x.user_quote }}</td>
+		<td>{{ x.user_picture }}</td>
+		<td>{{ x.user_song}}</td>
+	 	<td>{{ x.user_video}}</td>
+		<td>{{ x.user_profile_picture }}</td>
+		<td>{{ x.user_join_date }}</td>
+		<td>{{ x.user_about_me}}</td>
+	     </tr>
+	</table>
+</div>
+
+
+
+<!--Angular JS  -->
+<script>
+var app = angular.module('myApp', []);
+app.controller('user_info', function($scope, $http) {
+   $http.get("get_user_info.php?userid=*")
+   .success(function (response) {
+    $scope.out = response;
+    console.log(response)
+  });
+ $scope.submit = function(){
+    console.log($scope)
+    console.log("save")
+    $http.post("http://webprojects.eecs.qmul.ac.uk/rgr30/BeOne/assets/php/signUp.php", {
+      'fname' : $scope.fname,
+      'lname' : $scope.lname,
+      'uname' : $scope.email,
+      'email' : $scope.email,
+      'pwd' : $scope.pwd,
+      'country' : $scope.country,
+      'city' : $scope.city,
+      'dob' : $scope.dob,
+      'sex' : $scope.sex,
+      'goal' : $scope.goal
+    }).success(function(data,status,headers,config){
+      console.log("success")
+    });
+
+    $http.post("http://webprojects.eecs.qmul.ac.uk/rgr30/BeOne/assets/php/sanctuary_save.php?userid="+$scope.uid, {
+      'spotifyURI' : $scope.spotifyURI,
+      'quote' : $scope.quote,
+      'youtubeURL': $scope.youtubeURL,
+      'imageURL' : $scope.imageURL
+    }).success(function(data,status,headers,config){
+      console.log("success")
+    })
+
+}
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+    <?PHP print $errorMessage;?>  
+  </body>
+</html>

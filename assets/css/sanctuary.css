@@ -1,0 +1,76 @@
+.sanctuary-color{
+	color: #00C199;	
+	border-left:#00C199;
+}
+.sanctuary-background {
+	background-color: #ffffff
+}
+div.tab-menu div.list-group>a.active,
+div.tab-menu div.list-group>a.active .glyphicon,
+div.tab-menu div.list-group>a.active .fa{
+  background-color: #00C199; 
+  color:#ffffff;
+}
+div.tab-container{
+  padding: 0 !important;
+
+}
+div.tab-menu div.list-group>a .glyphicon,
+div.tab-menu div.list-group>a .fa {
+  height: 70%;
+}
+
+div.tab-menu div.list-group>a.active:after{
+  content: '';
+  position: absolute;
+  left: 100%;
+  margin-top: -60px;
+  border-left: 0;
+  border-bottom: 13px solid transparent;
+  border-top: 13px solid transparent;
+  
+
+}
+div.tab div.tab-content:not(.active){
+  display: none;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+}
+
+div.tab div.tab-content.active{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(15%);
+
+}
+
+.fa { 
+    position: relative;
+    display: inline;
+    top: 1px;
+    font-weight: 400;
+    line-height: 1;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon{
+    position: relative;
+    display: inline;
+    top: 1px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 2;
+    font-family:'Glyphicons Halflings';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+img {
+height: 477.5;
+width: 840}
+

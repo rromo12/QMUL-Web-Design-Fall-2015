@@ -1,0 +1,119 @@
+
+<link href="assets/css/sanctuary.css" rel="stylesheet"/>
+<div class="row sanctuary-background">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 tab-container">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 tab-menu">
+            <div class="list-group">
+                <a class="list-group-item active text-center">
+                    <h1 class="glyphicon glyphicon-music sanctuary-color"></h1><br/>Music
+                </a>
+                <a class="list-group-item text-center">
+                    <h1><i class="fa fa-quote-left sanctuary-color"></i></h1><br/>Quote
+                </a>
+                <a class="list-group-item text-center">
+                    <h1 class="glyphicon glyphicon-film sanctuary-color"></h1><br/>Video
+                </a>
+                <a class="list-group-item text-center">
+                    <h1 class="glyphicon glyphicon-picture sanctuary-color"></h1><br/>Picture
+                </a>
+                <a class="list-group-item text-center">
+                    <h1 id = 'settings' class='glyphicon glyphicon-cog sanctuary-color'></h1><br/> Settings
+                </a>
+            </div>
+        </div>
+
+
+
+
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9 tab">
+
+
+            <!-- music section -->
+            <div class="tab-content active sanctuary-background" id="music-tab">
+                <center>
+                    <h1 class="glyphicon glyphicon-music sanctuary-color" style="font-size:14em;"></h1>
+                    <h2 style="margin-top: 0;" class = "sanctuary-color">Please Select a Song</h2>
+                    <!-- have a music option, youtube url, spotify?-->
+                </center>
+            </div>
+
+
+            <!-- quote section -->
+            <div class="tab-content" id="quote-tab">
+                <center>
+                    <h1 style="font-size:12em;" class = "sanctuary-color"><i class="fa fa-quote-left"></i></h1>
+
+                    <h2 style="margin-top: 0;" class ="sanctuary-color">Please Select a Quote </h2>
+
+                    <!-- have a drop down with quotes and an use my own quote option-->
+                </center>
+            </div>
+
+            <!-- video section -->
+            <div class="tab-content" id = "video-tab">
+                <center>
+                    <h1 class="glyphicon glyphicon-film sanctuary-color" style="font-size:12em;"></h1>
+                    <h2 style="margin-top: 0;"class="sanctuary-color">Please Select a Video</h2>
+                </center>
+            </div>
+            <!-- picture section -->
+            <div class="tab-content" id="picture-tab">
+                <center>
+                    <h1 class="glyphicon glyphicon-picture sanctuary-color" style="font-size:12em"></h1>
+                    <h2 style="margin-top: 0;" class="sanctuary-color">Please Select a picture</h2>
+                    <!-- ask for youtube url-->
+                </center>
+
+            </div>
+
+            <!-- settings form -->
+            <div class="tab-content">
+                <form>
+                    <h2 class="glyphicon glyphicon-music sanctuary-color" ></h2><br>
+                    <div class="input-group">
+                        <span class="input-group-addon" class="col-sm-8" id="sizing-addon3">Spotify URI:</span>
+                        <input type="text" class="form-control" required area-describedby="sizing-addon3" pattern="spotify:track:[a-zA-Z0-9]{22}" ng-model="spotifyURI" placeholder = "spotify:track:1IeJhRBNpDAzq2pKotvyGk">
+                    </div>
+                    <h2><i class="fa fa-quote-left sanctuary-color">                </i></h2><br>
+                    <div class="input-group">
+                        <span class="input-group-addon" class="col-sm-8" id="sizing-addon3">Quote:</span>
+                        <input type="text" class="form-control"  required area-describedby="sizing-addon3" ng-model="quote" placeholder = "In three words I can sum up everything I’ve learned about life — It goes on. - Robert Frost">
+                    </div>
+                    <h2 class="glyphicon glyphicon-film sanctuary-color"></h2> <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" class="col-sm-8" id="sizing-addon3">Youtube URL:</span>
+                        <input type="text" class="form-control" required aria-describedby="sizing-addon3" ng-model="youtubeURL" placeholder = "https://www.youtube.com/watch?v=D-eVF_G_p-Y">
+                    </div>
+                    <h2 class="glyphicon glyphicon-picture sanctuary-color"></h2>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon" class="col-sm-8" id="sizing-addon3">Image URL:     </span>
+                        <input type="text" class="form-control" required aria-describedby="sizing-addon3" ng-model="imageURL" pattern = "^https?://(?:[a-z0-9\-]+\.)+[a-z]{2,6}(?:/[^/#?]+)+\.(?:jpg|gif|png)$" placeholder = "https://upload.wikimedia.org/wikipedia/commons/4/4c/Pagan_meditation.jpg">
+                    </div>
+                    <br>
+                    <center>
+                        <input type="submit" class="btn btn-default" value="Save" ng-click="save()">
+                    </center>
+                </form>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $("div.tab-menu>div.list-group>a").click(function(e) {
+            e.preventDefault();
+            $(this).siblings('a.active').removeClass("active");
+            $(this).addClass("active");
+            var index = $(this).index();
+            $("div.tab>div.tab-content").removeClass("active");
+            $("div.tab>div.tab-content").eq(index).addClass("active");
+        });
+    });
+</script>
+
