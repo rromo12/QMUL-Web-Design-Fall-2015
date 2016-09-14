@@ -5,10 +5,6 @@
   header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE');
   header('Access-Control-Allow-Headers: Authorization');
   
-  /*$user_name = "rgr30";
-  $pass_word = "JMvRAKbOpcObx";
-  $database = "rgr30";
-  $server = "dbprojects.eecs.qmul.ac.uk";
 */
   $user_name = "root";
   $pass_word = "";
